@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Live Attendance</title>
+
+<link rel="stylesheet" href="live-attendance.css">
+
+</head>
+
+<body>
+
+<header class="top-bar">
+
+Hybrid Attendance System
+
+</header>
+
+<div class="container">
+
+<h1>Live Attendance</h1>
+
+<div class="summary">
+
+<div class="card">
+<h3>Total Students</h3>
+<h1 id="totalStudents">50</h1>
+</div>
+
+<div class="card">
+<h3>Present</h3>
+<h1 id="presentStudents">42</h1>
+</div>
+
+<div class="card">
+<h3>Absent</h3>
+<h1 id="absentStudents">5</h1>
+</div>
+
+<div class="card">
+<h3>Pending</h3>
+<h1 id="pendingStudents">3</h1>
+</div>
+
+</div>
+
+<div class="session-box">
+
+<p><strong>Subject :</strong> <span id="subject">Web Engineering</span></p>
+
+<p><strong>Semester :</strong> <span id="semester">7</span></p>
+
+<p><strong>Section :</strong> <span id="section">A</span></p>
+
+<p><strong>Status :</strong>
+
+<span style="color:green;font-weight:bold;">
+
+Live
+
+</span>
+
+</p>
+
+</div>
+
+<table>
+
+<tr>
+
+<th>Roll No</th>
+
+<th>Student Name</th>
+
+<th>Status</th>
+
+</tr>
+
+<tr>
+
+<td>21-CS-001</td>
+
+<td>Ali Ahmed</td>
+
+<td style="color:green;">Present</td>
+
+</tr>
+
+<tr>
+
+<td>21-CS-002</td>
+
+<td>Ahmed Raza</td>
+
+<td style="color:red;">Absent</td>
+
+</tr>
+
+<tr>
+
+<td>21-CS-003</td>
+
+<td>Usman Ali</td>
+
+<td style="color:orange;">Pending</td>
+
+</tr>
+
+<tr>
+
+<td>21-CS-004</td>
+
+<td>Hamza Khan</td>
+
+<td style="color:green;">Present</td>
+
+</tr>
+
+<tr>
+
+<td>21-CS-005</td>
+
+<td>Bilal Ahmed</td>
+
+<td style="color:green;">Present</td>
+
+</tr>
+
+</table>
+
+<div class="buttons">
+
+<button class="orange-btn" id="refreshBtn">
+
+Refresh
+
+</button>
+
+<button class="orange-btn" id="endSessionBtn">
+
+End Session
+
+</button>
+
+</div>
+
+</div>
+
+<footer class="bottom-bar">
+
+© 2026 Hybrid Attendance System
+
+</footer>
+
+<script src="live-attendance.js"></script>
+
+</body>
+
+</html>

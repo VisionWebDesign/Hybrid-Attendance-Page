@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance History | Hybrid Attendance System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    /* Extra styles for history page */
+    .history-filters { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
+    .filter-group { display: flex; flex-direction: column; gap: 6px; }
+    .filter-group label { font-size: 12px; font-weight: 500; color: var(--text-muted); }
+    .filter-select { padding: 9px 32px 9px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; appearance: none; outline: none; cursor: pointer; min-width: 150px; transition: border-color 0.2s; }
+    .filter-select:focus { border-color: var(--orange); }
+    .filter-select option { background: #1a1a24; }
+    .filter-date { padding: 9px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; outline: none; transition: border-color 0.2s; color-scheme: dark; }
+    .filter-date:focus { border-color: var(--orange); }
+    .filter-btn { padding: 10px 20px; border-radius: 10px; background: linear-gradient(135deg, var(--orange), var(--orange-dark)); border: none; color: white; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover { opacity: 0.9; }
+    .summary-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .sum-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 4px; }
+    .sum-card .label { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+    .sum-card .value { font-size: 28px; font-weight: 800; }
+    .sum-card .sub { font-size: 11px; color: var(--text-muted); }
+    .sum-card.orange .value { color: var(--orange); }
+    .sum-card.green .value { color: #22c55e; }
+    .sum-card.red .value { color: #ef4444; }
+    .sum-card.purple .value { color: #a855f7; }
+    .subject-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .subj-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; transition: all 0.2s; }
+    .subj-card:hover { transform: translateY(-2px); border-color: rgba(249,115,22,0.2); }
+    .subj-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .subj-name { font-size: 14px; font-weight: 600; }
+    .subj-pct { font-size: 20px; font-weight: 800; color: var(--orange); }
+    .subj-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+    .subj-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--orange), var(--orange-light)); transition: width 0.6s ease; }
+    .subj-meta { display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px; color: var(--text-muted); }
+    .rec-head, .rec-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 90px; gap: 12px; padding: 11px 14px; align-items: center; }
+    .rec-head { background: var(--surface2); border-radius: 10px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .rec-row { border-bottom: 1px solid var(--border); font-size: 13px; transition: background 0.15s; }
+    .rec-row:hover { background: rgba(255,255,255,0.02); }
+    .rec-row:last-child { border: none; }
+    .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .status-badge.present { background: rgba(34,197,94,0.1); color: #86efac; border: 1px solid rgba(34,197,94,0.2); }
+    .status-badge.absent { background: rgba(239,68,68,0.1); color: #fca5a5; border: 1px solid rgba(239,68,68,0.2); }
+    @media(max-width:900px) { .summary-cards { grid-template-columns: repeat(2, 1fr); } .subject-grid { grid-template-columns: 1fr 1fr; } .rec-head, .rec-row { grid-template-columns: 2fr 1fr 80px; } .rec-head span:nth-child(3), .rec-row span:nth-child(3), .rec-head span:nth-child(4), .rec-row span:nth-child(4) { display: none; } }
+    @media(max-width:600px) { .subject-grid { grid-template-columns: 1fr; } .summary-cards { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">HAS</div>
+      <span>Attendance</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="student.html" class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="../Session/session.html" class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
+        Join Session
+      </a>
+      <a href="./attendance_history.html" class="nav-item active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+        History
+      </a>
+    </nav>
+    <button class="logout-btn" onclick="window.location.href='/Login-form/Login.html'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Logout
+    </button>
+  </div>
+
+  <div class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <div>
+          <h2>Attendance History</h2>
+          <p id="curDate"></p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="avatar">TK</div>
+      </div>
+    </header>
+
+    <div class="content-body">
+
+      <!-- Filters -->
+      <div class="card" style="padding:20px">
+        <div class="history-filters">
+          <div class="filter-group">
+            <label>Subject</label>
+            <select class="filter-select" id="subjectFilter">
+              <option value="">All Subjects</option>
+              <option>Web Development</option>
+              <option>Database Systems</option>
+              <option>Cloud Computing</option>
+              <option>Mobile Application</option>
+              <option>Computer Architecture</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Status</label>
+            <select class="filter-select" id="statusFilter">
+              <option value="">All</option>
+              <option value="present">Present</option>
+              <option value="absent">Absent</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Month</label>
+            <select class="filter-select" id="monthFilter">
+              <option value="">All Months</option>
+              <option>January</option><option>February</option><option>March</option>
+              <option>April</option><option>May</option><option>June</option>
+            </select>
+          </div>
+          <button class="filter-btn" onclick="applyFilter()">Apply Filter</button>
+        </div>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="summary-cards">
+        <div class="sum-card orange">
+          <div class="label">Total Classes</div>
+          <div class="value">130</div>
+          <div class="sub">All subjects combined</div>
+        </div>
+        <div class="sum-card green">
+          <div class="label">Present</div>
+          <div class="value" id="sumPresent">120</div>
+          <div class="sub">Classes attended</div>
+        </div>
+        <div class="sum-card red">
+          <div class="label">Absent</div>
+          <div class="value" id="sumAbsent">10</div>
+          <div class="sub">Classes missed</div>
+        </div>
+        <div class="sum-card purple">
+          <div class="label">Attendance Rate</div>
+          <div class="value" id="sumRate">92%</div>
+          <div class="sub">Overall percentage</div>
+        </div>
+      </div>
+
+      <!-- Subject-wise breakdown -->
+      <div class="card">
+        <div class="card-head">
+          <h3>Subject-wise Attendance</h3>
+          <span class="card-badge">6 Subjects</span>
+        </div>
+        <div class="subject-grid" id="subjectGrid"></div>
+      </div>
+
+      <!-- Detailed Records -->
+      <div class="card">
+        <div class="card-head">
+          <h3>Detailed Records</h3>
+          <span class="card-badge" id="recordCount">10 Records</span>
+        </div>
+        <div class="rec-head">
+          <span>Subject</span><span>Date</span><span>Time</span><span>Method</span><span>Status</span>
+        </div>
+        <div id="recordsBody"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="./function.js"></script>
+  <script>
+    const subjects = [
+      { name: "Web Development",    total: 22, present: 21, pct: 95 },
+      { name: "Database Systems",   total: 20, present: 18, pct: 90 },
+      { name: "Cloud Computing",    total: 18, present: 14, pct: 78 },
+      { name: "Mobile Application", total: 22, present: 20, pct: 91 },
+      { name: "Computer Arch.",     total: 24, present: 23, pct: 96 },
+      { name: "Software Eng.",      total: 24, present: 24, pct: 100 },
+    ];
+    const records = [
+      { subject: "Web Development",  date: "Jun 7, 2026",  time: "09:00 AM", method: "Face+GPS", status: "present" },
+      { subject: "Database Systems", date: "Jun 7, 2026",  time: "11:00 AM", method: "Face",     status: "present" },
+      { subject: "Cloud Computing",  date: "Jun 6, 2026",  time: "01:00 PM", method: "GPS",      status: "absent"  },
+      { subject: "Mobile App",       date: "Jun 5, 2026",  time: "09:00 AM", method: "Face+GPS", status: "present" },
+      { subject: "Computer Arch.",   date: "Jun 5, 2026",  time: "03:00 PM", method: "Face",     status: "present" },
+      { subject: "Software Eng.",    date: "Jun 4, 2026",  time: "11:00 AM", method: "Face+GPS", status: "present" },
+      { subject: "Database Systems", date: "Jun 3, 2026",  time: "09:00 AM", method: "GPS",      status: "absent"  },
+      { subject: "Web Development",  date: "Jun 2, 2026",  time: "11:00 AM", method: "Face",     status: "present" },
+      { subject: "Cloud Computing",  date: "Jun 1, 2026",  time: "01:00 PM", method: "Face+GPS", status: "present" },
+      { subject: "Mobile App",       date: "May 31, 2026", time: "09:00 AM", method: "Face",     status: "present" },
+    ];
+
+    function renderSubjects() {
+      document.getElementById("subjectGrid").innerHTML = subjects.map(s => `
+        <div class="subj-card">
+          <div class="subj-top">
+            <div class="subj-name">${s.name}</div>
+            <div class="subj-pct">${s.pct}%</div>
+          </div>
+          <div class="subj-bar-bg"><div class="subj-bar-fill" style="width:${s.pct}%"></div></div>
+          <div class="subj-meta"><span>${s.present} / ${s.total} classes</span><span>${s.total - s.present} absent</span></div>
+        </div>
+      `).join("");
+    }
+
+    function renderRecords(data) {
+      const body = document.getElementById("recordsBody");
+      body.innerHTML = data.map(r => `
+        <div class="rec-row">
+          <span>${r.subject}</span>
+          <span style="color:var(--text-muted)">${r.date}</span>
+          <span style="color:var(--text-muted)">${r.time}</span>
+          <span style="color:var(--text-muted)">${r.method}</span>
+          <span class="status-badge ${r.status}">${r.status === "present" ? "Present" : "Absent"}</span>
+        </div>
+      `).join("");
+      document.getElementById("recordCount").textContent = data.length + " Records";
+    }
+
+    function applyFilter() {
+      const sub = document.getElementById("subjectFilter").value;
+      const st = document.getElementById("statusFilter").value;
+      const filtered = records.filter(r =>
+        (!sub || r.subject.includes(sub.split(" ")[0])) &&
+        (!st || r.status === st)
+      );
+      renderRecords(filtered);
+    }
+
+    document.getElementById("curDate").textContent = new Date().toLocaleDateString("en-US", { weekday:"long", year:"numeric", month:"long", day:"numeric" });
+    renderSubjects();
+    renderRecords(records);
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<header class="top-bar">
+    Hybrid Attendance System
+</header>
+
+<div class="container">
+
+    <div class="welcome-card">
+
+        <div>
+            <h2 id="studentName">Welcome, Ali Ahmed</h2>
+
+            <p id="studentSemester">
+                BSCS - Semester 7
+            </p>
+        </div>
+
+        <div class="date-box">
+
+            <h3 id="todayDate"></h3>
+
+        </div>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>Attendance</h3>
+
+            <h1 id="attendancePercent">82%</h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Present</h3>
+
+            <h1 id="presentClasses">41</h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Absent</h3>
+
+            <h1 id="absentClasses">9</h1>
+
+        </div>
+
+    </div>
+
+    <!-- Chart -->
+
+    <div class="chart-card">
+
+        <canvas id="attendanceChart"></canvas>
+
+    </div>
+
+    <!-- Quick Actions -->
+
+    <div class="buttons">
+
+        <a href="../Session/session.html" class="orange-btn">
+
+            Join Session
+
+        </a>
+
+        <a href="/Login-form/Login.html" class="orange-btn">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</div>
+
+<footer class="bottom-bar">
+
+© 2026 Hybrid Attendance System | All Rights Reserved
+
+</footer>
+
+<script src="function.js"></script>
+
+</body>
+</html>

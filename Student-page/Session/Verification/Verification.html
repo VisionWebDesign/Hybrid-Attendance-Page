@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verification | Hybrid Attendance System</title>
+  <link rel="stylesheet" href="./Verify.css">
+</head>
+<body>
+<div class="bg-orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+</div>
+
+<div class="verify-page">
+  <div class="breadcrumb">
+    <a href="/Student-page/Session/session.html">Session</a>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+    <span>Verification</span>
+  </div>
+
+  <div class="verify-card">
+    <div class="brand">
+      <div class="logo-icon">HAS</div>
+      <span>Hybrid Attendance System</span>
+    </div>
+
+    <h2 class="verify-title">Mark Your Attendance</h2>
+    <p class="verify-sub">Complete the verification steps below to confirm your presence. At least Face + GPS verification is required.</p>
+
+    <!-- Status Pills -->
+    <div class="status-pills">
+      <div class="s-pill" id="facePill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 20c0-4 2.7-7 6-7s6 3 6 7"/></svg>
+        Face
+      </div>
+      <div class="s-pill" id="gpsPill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>
+        GPS
+      </div>
+      <div class="s-pill" id="voicePill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+        Voice
+      </div>
+    </div>
+
+    <!-- Verification Methods -->
+    <div class="method-options">
+      <button class="method-btn" id="faceBtn" onclick="goToFace()">
+        <div class="method-icon face">👤</div>
+        <div class="method-info">
+          <strong>Face Verification</strong>
+          <small>Scan your face using camera</small>
+        </div>
+        <span class="method-tick">✅</span>
+        <svg class="method-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+
+      <button class="method-btn" id="gpsBtn" onclick="goToGPS()">
+        <div class="method-icon gps">📍</div>
+        <div class="method-info">
+          <strong>GPS Location</strong>
+          <small>Verify you're within campus range</small>
+        </div>
+        <span class="method-tick">✅</span>
+        <svg class="method-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+
+      <button class="method-btn" id="voiceBtn" onclick="goToVoice()">
+        <div class="method-icon voice">🎙️</div>
+        <div class="method-info">
+          <strong>Voice Verification</strong>
+          <small>Optional — additional security</small>
+        </div>
+        <span class="method-tick">✅</span>
+        <svg class="method-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="finalCheck()" disabled>
+      Submit Attendance
+    </button>
+    <a href="/Student-page/Session/session.html" class="back-link">← <span>Back to Session</span></a>
+  </div>
+</div>
+
+<script>
+window.onload = function () {
+  if (!localStorage.getItem("sessionStarted")) {
+    localStorage.setItem("sessionStarted", "true");
+    localStorage.removeItem("face");
+    localStorage.removeItem("voice");
+    localStorage.removeItem("gps");
+  }
+  updateUI();
+};
+
+function updateUI() {
+  const face = localStorage.getItem("face") === "1";
+  const gps = localStorage.getItem("gps") === "1";
+  const voice = localStorage.getItem("voice") === "1";
+
+  toggleBtn("faceBtn", "facePill", face);
+  toggleBtn("gpsBtn", "gpsPill", gps);
+  toggleBtn("voiceBtn", "voicePill", voice);
+
+  document.getElementById("submitBtn").disabled = !(face && gps);
+}
+
+function toggleBtn(btnId, pillId, done) {
+  const btn = document.getElementById(btnId);
+  const pill = document.getElementById(pillId);
+  if (done) {
+    btn.classList.add("completed");
+    pill.classList.remove("pending");
+    pill.classList.add("done");
+  } else {
+    btn.classList.remove("completed");
+    pill.classList.remove("done");
+    pill.classList.add("pending");
+  }
+}
+
+function finalCheck() {
+  const face = localStorage.getItem("face") === "1";
+  const gps = localStorage.getItem("gps") === "1";
+  if (face && gps) {
+    window.location.href = "./attendance_verify.html";
+  } else {
+    alert("❌ Please complete Face & GPS verification first.");
+  }
+}
+
+function goToFace()  { window.location.href = "./Face-verification.html"; }
+function goToGPS()   { window.location.href = "./GPS.html"; }
+function goToVoice() { window.location.href = "./Voice-verification.html"; }
+</script>
+</body>
+</html>

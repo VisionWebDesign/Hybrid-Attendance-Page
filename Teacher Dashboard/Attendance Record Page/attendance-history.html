@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Attendance Record</title>
+
+<link rel="stylesheet" href="attendance-history.css">
+
+</head>
+
+<body>
+
+<header class="top-bar">
+
+Hybrid Attendance System
+
+</header>
+
+<div class="container">
+
+<h1>Attendance Record</h1>
+
+<div class="filter-box">
+
+<input
+type="text"
+id="searchStudent"
+placeholder="Search Student">
+
+<select id="subject">
+
+<option>All Subjects</option>
+<option>Web Engineering</option>
+<option>Operating System</option>
+<option>Database System</option>
+
+</select>
+
+<input
+type="date"
+id="date">
+
+<button class="orange-btn" id="searchBtn">
+
+Search
+
+</button>
+
+</div>
+
+<table>
+
+<tr>
+
+<th>Roll No</th>
+<th>Student Name</th>
+<th>Subject</th>
+<th>Date</th>
+<th>Status</th>
+
+</tr>
+
+<tr>
+
+<td>21-CS-001</td>
+<td>Ali Ahmed</td>
+<td>Web Engineering</td>
+<td>15-07-2026</td>
+<td style="color:green;">Present</td>
+
+</tr>
+
+<tr>
+
+<td>21-CS-002</td>
+<td>Ahmed Raza</td>
+<td>Web Engineering</td>
+<td>15-07-2026</td>
+<td style="color:red;">Absent</td>
+
+</tr>
+
+<tr>
+
+<td>21-CS-003</td>
+<td>Usman Ali</td>
+<td>Operating System</td>
+<td>14-07-2026</td>
+<td style="color:green;">Present</td>
+
+</tr>
+
+<tr>
+
+<td>21-CS-004</td>
+<td>Hamza Khan</td>
+<td>Database System</td>
+<td>13-07-2026</td>
+<td style="color:green;">Present</td>
+
+</tr>
+
+</table>
+
+<div class="buttons">
+
+<button class="orange-btn" id="downloadBtn">
+
+Download
+
+</button>
+
+<a
+href="../teacher-dashboard.html"
+class="orange-btn">
+
+Dashboard
+
+</a>
+
+</div>
+
+</div>
+
+<footer class="bottom-bar">
+
+© 2026 Hybrid Attendance System
+
+</footer>
+
+<script src="attendance-history.js"></script>
+
+</body>
+
+</html>

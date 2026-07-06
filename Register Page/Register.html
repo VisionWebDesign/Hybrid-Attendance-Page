@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Hybrid Attendance System</title>
+  <meta name="description" content="Create your account on Hybrid Attendance System">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <div class="page-wrapper">
+    <div class="brand-side">
+      <div class="brand-content">
+        <div class="brand-logo">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+            <rect width="52" height="52" rx="16" fill="url(#logoGrad)"/>
+            <path d="M14 26C14 19.373 19.373 14 26 14C32.627 14 38 19.373 38 26C38 32.627 32.627 38 26 38" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="26" cy="26" r="5" fill="white"/>
+            <path d="M26 20V14M26 38V34M20 26H14M32 26H38" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="52" y2="52">
+                <stop offset="0%" stop-color="#f97316"/>
+                <stop offset="100%" stop-color="#ea580c"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>HAS</span>
+        </div>
+        <h1>Join Hybrid Attendance System</h1>
+        <p>Create your account and start tracking attendance with cutting-edge Face Recognition & GPS technology</p>
+        <div class="feature-list">
+          <div class="feature-item"><span class="feature-icon">👤</span><span>Face Recognition</span></div>
+          <div class="feature-item"><span class="feature-icon">📍</span><span>GPS Location Tracking</span></div>
+          <div class="feature-item"><span class="feature-icon">📊</span><span>Real-time Analytics</span></div>
+          <div class="feature-item"><span class="feature-icon">🔔</span><span>Parent Notifications</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-side">
+      <div class="register-card">
+        <div class="card-header">
+          <h2>Create Account</h2>
+          <p>Fill in your details to get started</p>
+        </div>
+
+        <form id="registerForm" novalidate>
+          <div class="input-group">
+            <label for="fullName">Full Name</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <input type="text" id="fullName" placeholder="Enter your full name" required autocomplete="name">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="email">Email Address</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" id="email" placeholder="Enter your email" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="password">Password</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input type="password" id="password" placeholder="Create password" required autocomplete="new-password">
+                <button type="button" class="toggle-pw" id="togglePw1">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="confirmPassword">Confirm Password</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input type="password" id="confirmPassword" placeholder="Confirm password" required autocomplete="new-password">
+                <button type="button" class="toggle-pw" id="togglePw2">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="role">Select Role</label>
+            <div class="input-wrapper select-wrapper">
+              <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <select id="role" required>
+                <option value="">Choose your role</option>
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Admin">Admin</option>
+              </select>
+              <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+          </div>
+
+          <div id="errorMsg" class="error-msg" style="display:none">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <span id="errorText">Error message</span>
+          </div>
+
+          <div id="successMsg" class="success-msg" style="display:none">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg>
+            <span>Account created! Redirecting to login...</span>
+          </div>
+
+          <button type="submit" class="register-btn" id="registerBtn">
+            <span id="btnText">Create Account</span>
+            <div class="btn-spinner" id="btnSpinner" style="display:none"></div>
+          </button>
+        </form>
+
+        <p class="login-link">Already have an account? <a href="../Login-form/Login.html">Sign In</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="./Register.js"></script>
+</body>
+</html>
